@@ -36,11 +36,10 @@ class Client
     private $sMethod;
     public  $aParams;
 
-    public function __construct()
+    public function __construct($apiURL, $apiSID)
     {
-        $config=require(dirname(__FILE__).'/../config.php');
-        $this->API_URL  = $config['ApiURL'];
-        $this->APP_SID  = $config['AppSid'];
+        $this->API_URL  = $apiURL;
+        $this->APP_SID  = $apiSID;
         $this->Messages = new Message($this);
         $this->Account  = new Account($this);
         $this->Voice    = new Voice($this);
