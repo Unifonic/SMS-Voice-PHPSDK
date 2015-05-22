@@ -1,7 +1,7 @@
 <?php
 
 namespace OTS\API\Voice;
-use OTS\lib\GUMP\gump;
+use OTS\lib\GUMP\GUMP;
 
 /**
  * Class Voice

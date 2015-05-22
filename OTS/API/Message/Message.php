@@ -3,7 +3,7 @@
 
 namespace OTS\API\Message;
 use OTS\API\Exception;
-use OTS\lib\GUMP\gump;
+use OTS\lib\GUMP\GUMP;
 
 /**
  * Class Message

@@ -2,7 +2,7 @@
 
 namespace OTS\API\Account;
 use OTS\API\Exception;
-use OTS\lib\GUMP\gump;
+use OTS\lib\GUMP\GUMP;
 
 /**
  * Class Account
