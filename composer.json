@@ -1,0 +1,11 @@
+{
+    "name": "otsdc/sms-voice-phpsdk",
+    "description": "RESTful API for OTS Cloud Platform",
+    "authors": [
+        {
+            "name": "Karim Mohamed",
+            "email": "bkhanfar@otsdc.com"
+        }
+    ],
+    "require": {}
+}
