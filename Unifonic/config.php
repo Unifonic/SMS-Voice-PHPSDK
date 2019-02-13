@@ -1,7 +1,6 @@
 <?php
 
-
-    return array(
-        'AppSid' => ['Your Rest AppSid'],
-        'ApiURL' => 'http://api.unifonic.com/rest/',
-    );
+return [
+    'AppSid' => ['YOUR REST APPSID'],
+    'ApiURL' => 'http://api.unifonic.com/rest/',
+];

@@ -7,13 +7,15 @@
  */
 
 namespace Unifonic\API\Checker;
+
 use Unifonic\lib\GUMP\GUMP;
 
 /**
  * Class Account
  * @package Unifonic\API\Account
  */
-Class Checker{
+Class Checker
+{
 
     /**
      * @var
@@ -31,36 +33,36 @@ Class Checker{
     }
 
 
-    public function Rules($methodName){
+    public function Rules($methodName)
+    {
 
-        $rules = array(
-            'CheckNumber'=>array(
-                'Recipient' =>  'numeric|required|min_len,12|max_len,14'
-            )
-        );
+        $rules = [
+            'CheckNumber' => [
+                'Recipient' => 'numeric|required|min_len,12|max_len,14'
+            ]
+        ];
 
         return $rules["$methodName"];
     }
 
     /**
      * @param $Recipient
+     *
      * @return mixed
      */
     public function CheckNumber($Recipient)
     {
-        $aParams = array();
+        $aParams = [];
         $aParams['Recipient'] = $Recipient;
 
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
             return $this->client->Checker_CheckNumber($aParams);
 
-        }else{
+        } else {
             return $valid[0];
         }
     }
 
 
 }
-?>

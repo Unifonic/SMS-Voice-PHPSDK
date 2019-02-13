@@ -1,6 +1,7 @@
 <?php
 
 namespace Unifonic\API\Account;
+
 use Unifonic\API\Exception;
 use Unifonic\lib\GUMP\GUMP;
 
@@ -21,38 +22,33 @@ Class Account
      */
     public function __construct($oClient)
     {
-
         $this->client = $oClient;
-
     }
 
 
-    public function Rules($methodName){
+    public function Rules($methodName)
+    {
 
-        $rules = array(
-            'GetBalance' => array(
-            ),
-            'AddSenderID' => array(
-                'SenderID'  =>  'required',
-            ),
-            'GetSenderIDStatus' => array(
-                'SenderID'  =>  'required',
-            ),
-            'GetSenderIDs' => array(),
-            'GetAppDefaultSenderID' => array(
-            ),
-            'ChangeAppDefaultSenderID'=>array(),
-            'DeleteSenderID'=>array(
-                'SenderID'  =>  'required',
-            )
-
-        );
+        $rules = [
+            'GetBalance' => [
+            ],
+            'AddSenderID' => [
+                'SenderID' => 'required',
+            ],
+            'GetSenderIDStatus' => [
+                'SenderID' => 'required',
+            ],
+            'GetSenderIDs' => [],
+            'GetAppDefaultSenderID' => [
+            ],
+            'ChangeAppDefaultSenderID' => [],
+            'DeleteSenderID' => [
+                'SenderID' => 'required',
+            ]
+        ];
 
         return $rules["$methodName"];
-
     }
-
-
 
 
     /**
@@ -60,13 +56,11 @@ Class Account
      */
     public function GetBalance()
     {
-        $aParams = array();
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
-        return $this->client->Account_GetBalance();
-
-        }else{
+        $aParams = [];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
+            return $this->client->Account_GetBalance();
+        } else {
             return $valid[0];
         }
     }
@@ -74,6 +68,7 @@ Class Account
 
     /**
      * @param $SenderID
+     *
      * @return mixed
      * @throws \Exception
      * @throws \Unifonic\API\Exception
@@ -81,31 +76,30 @@ Class Account
     public function AddSenderID($SenderID)
     {
         try {
-            $aParams = array('SenderID' => $SenderID);
-            $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-            if($valid === true)
-            {
-            return $this->client->Account_AddSenderID($aParams);
-            }else{
+            $aParams = ['SenderID' => $SenderID];
+            $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+            if ($valid === true) {
+                return $this->client->Account_AddSenderID($aParams);
+            } else {
                 return $valid[0];
             }
         } catch (Exception $e) {
-           throw $e;
-
+            throw $e;
         }
     }
 
     /**
-     * @param String$SenderID
+     * @param String $SenderID
+     *
      * @return stdClass
      */
-    public function GetSenderIDStatus($SenderID){
-        $aParams = array('SenderID' => $SenderID);
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
-        return $this->client->Account_GetSenderIDStatus($aParams);
-        }else{
+    public function GetSenderIDStatus($SenderID)
+    {
+        $aParams = ['SenderID' => $SenderID];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
+            return $this->client->Account_GetSenderIDStatus($aParams);
+        } else {
             return $valid[0];
         }
     }
@@ -113,13 +107,13 @@ Class Account
     /**
      * @return stdClass
      */
-    public function GetSenderIDs(){
-        $aParams = array();
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
-        return $this->client->Account_GetSenderIDs($aParams);
-        }else{
+    public function GetSenderIDs()
+    {
+        $aParams = [];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
+            return $this->client->Account_GetSenderIDs($aParams);
+        } else {
             return $valid[0];
         }
     }
@@ -127,28 +121,29 @@ Class Account
     /**
      * @return stdClass
      */
-    public function GetAppDefaultSenderID(){
-        $aParams = array();
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
-        return $this->client->Account_GetAppDefaultSenderID();
-        }else{
+    public function GetAppDefaultSenderID()
+    {
+        $aParams = [];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
+            return $this->client->Account_GetAppDefaultSenderID();
+        } else {
             return $valid[0];
         }
     }
 
     /**
      * @param String $SenderID
+     *
      * @return stdClass
      */
-    public function ChangeAppDefaultSenderID($SenderID){
-        $aParams = array('SenderID' => $SenderID);
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
+    public function ChangeAppDefaultSenderID($SenderID)
+    {
+        $aParams = ['SenderID' => $SenderID];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
             return $this->client->ChangeAppDefaultSenderID($aParams);
-        }else{
+        } else {
             return $valid[0];
         }
 
@@ -156,18 +151,18 @@ Class Account
 
     /**
      * @param String $SenderID
+     *
      * @return stdClass
      */
-    public function DeleteSenderID($SenderID){
-        $aParams = array('SenderID' => $SenderID);
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid === true)
-        {
-        return $this->client->DeleteSenderID($aParams);
-        }else{
+    public function DeleteSenderID($SenderID)
+    {
+        $aParams = ['SenderID' => $SenderID];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
+            return $this->client->DeleteSenderID($aParams);
+        } else {
             return $valid[0];
         }
     }
-
 
 }

@@ -1,14 +1,15 @@
 <?php
 
 namespace Unifonic\API\Verify;
+
 use Unifonic\lib\GUMP\GUMP;
 
 /**
  * Class Voice
  * @package Unifonic\API\Verify
  */
-
-Class Verify{
+Class Verify
+{
 
     /**
      * @var
@@ -26,12 +27,19 @@ Class Verify{
 
     /**
      * @param $methodName
-     * @return $rules["$methodName"]
+     *
+     * @return mixed $rules["$methodName"]
      */
-    public function Rules($methodName){
+    public function Rules($methodName)
+    {
+        $rules = [
+            'GetCode' => ['Recipient' => 'numeric|required|min_len,12|max_len,12', 'Body' => 'required'],
+            'VerifyNumber' => [
+                'Recipient' => 'numeric|required|min_len,12|max_len,12',
+                'PassCode' => 'required|numeric|min_len,4|max_len,4'
+            ]
+        ];
 
-        $rules = array('GetCode'=>array('Recipient'=>'numeric|required|min_len,12|max_len,12','Body'=>'required') ,
-            'VerifyNumber' =>array('Recipient'=>'numeric|required|min_len,12|max_len,12','PassCode'=>'required|numeric|min_len,4|max_len,4'));
         return $rules["$methodName"];
     }
 
@@ -40,38 +48,40 @@ Class Verify{
      * @param $Body
      * @param $SecurityType
      * @param $Expiry
+     *
      * @return mixed
      */
 
-    public function GetCode($Recipient,$Body,$SecurityType='TSP',$Expiry='24:00:00'){
-
-     /*
-      * $SecurityType Param can be either "Time Session Passcode : TSP - Default or One Time Passcode OTP "
-      */
-
-        $aParams = array('Recipient'=>$Recipient,'Body'=>$Body,'SecurityType'=>$SecurityType ,'Expiry'=>$Expiry);
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid===TRUE)
+    public function GetCode($Recipient, $Body, $SecurityType = 'TSP', $Expiry = '24:00:00')
+    {
+        /*
+         * $SecurityType Param can be either "Time Session PassCode : TSP - Default or One Time PassCode OTP "
+         */
+        $aParams = ['Recipient' => $Recipient, 'Body' => $Body, 'SecurityType' => $SecurityType, 'Expiry' => $Expiry];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
             return $this->client->Verify_GetCode($aParams);
-        else
+        } else {
             return $valid[0];
+        }
     }
 
     /**
      * @param $Recipient
      * @param $PassCode
+     *
      * @return mixed
      */
 
-    public function VerifyNumber($Recipient , $PassCode){
-
-        $aParams = array('Recipient'=>$Recipient,'PassCode'=>$PassCode);
-        $valid = GUMP::is_valid($aParams ,$this->Rules(__FUNCTION__));
-        if($valid===TRUE)
+    public function VerifyNumber($Recipient, $PassCode)
+    {
+        $aParams = ['Recipient' => $Recipient, 'PassCode' => $PassCode];
+        $valid = GUMP::is_valid($aParams, $this->Rules(__FUNCTION__));
+        if ($valid === true) {
             return $this->client->Verify_VerifyNumber($aParams);
-        else
+        } else {
             return $valid[0];
-
+        }
     }
 
 }
